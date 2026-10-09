@@ -14,6 +14,12 @@ class IatHookSet {
                                          const char* function_name,
                                          void* replacement,
                                          HMODULE skip_module = nullptr);
+  // Hooks only the game executable. Other modules (ReShade, its add-ons, other mods) can be
+  // unloaded at any time, and patching their import tables races with that unload.
+  std::size_t install_main_module(const char* imported_module,
+                                  const char* function_name,
+                                  void* replacement,
+                                  HMODULE skip_module = nullptr);
   bool uninstall();
   std::size_t count() const;
 

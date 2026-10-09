@@ -64,9 +64,8 @@ void Logger::write_line(const char* level, const std::string& message) {
   }
   const std::string line = timestamp_utc() + " [" + level + "] " + message + "\r\n";
   buffer_ += line;
-  if (buffer_.size() >= 16 * 1024) {
-    flush_locked();
-  }
+  // The log is low volume; flushing every line keeps it useful when the game crashes.
+  flush_locked();
 }
 
 void Logger::flush_locked() {

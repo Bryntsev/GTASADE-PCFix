@@ -126,6 +126,10 @@ BOOL RawInputObserver::observe_register_devices(PCRAWINPUTDEVICE devices, UINT c
 }
 
 void RawInputObserver::observe_get_proc_address_request(const char* function_name, bool replaced) {
+  if (!csv_.enabled()) {
+    (void)function_name;
+    return;
+  }
   std::ostringstream row;
   row << sequence_.fetch_add(1, std::memory_order_relaxed) + 1 << ',' << qpc_now() << ",getproc,0,0,0,"
       << (replaced ? 1 : 0) << ",0,0,0,0,0,0,0";
@@ -138,6 +142,9 @@ void RawInputObserver::observe_message(const char* source, const MSG& message) {
     return;
   }
   queue_.record_wm_input_message();
+  if (!csv_.enabled()) {
+    return;
+  }
   std::ostringstream row;
   row << sequence_.fetch_add(1, std::memory_order_relaxed) + 1 << ',' << qpc_now() << ',' << source << ",0,"
       << message.lParam << ',' << message.hwnd << ",1," << message.message << ',' << message.wParam << ",0,0,0,0,0";
@@ -146,6 +153,9 @@ void RawInputObserver::observe_message(const char* source, const MSG& message) {
 
 void RawInputObserver::observe_cursor_point(
     const char* source, BOOL result, LONG x, LONG y, std::uintptr_t caller_rva, std::uintptr_t parent_rva) {
+  if (!csv_.enabled()) {
+    return;
+  }
   std::ostringstream row;
   row << sequence_.fetch_add(1, std::memory_order_relaxed) + 1 << ',' << qpc_now() << ',' << source << ','
       << caller_rva << ",0,0," << result << ',' << parent_rva << ",0," << x << ',' << y << ",0,0,0";
@@ -154,6 +164,9 @@ void RawInputObserver::observe_cursor_point(
 
 void RawInputObserver::observe_cursor_rect(
     const char* source, BOOL result, const RECT* rect, std::uintptr_t caller_rva, std::uintptr_t parent_rva) {
+  if (!csv_.enabled()) {
+    return;
+  }
   std::ostringstream row;
   row << sequence_.fetch_add(1, std::memory_order_relaxed) + 1 << ',' << qpc_now() << ',' << source << ','
       << caller_rva << ",0,0," << result << ',' << parent_rva << ",0,";
@@ -188,6 +201,9 @@ void RawInputObserver::observe_mouse(
   event.button_data = raw.data.mouse.usButtonData;
   event.deduplicated = duplicate ? 1 : 0;
   queue_.push(event);
+  if (!csv_.enabled()) {
+    return;
+  }
 
   std::ostringstream row;
   row << event.sequence << ',' << event.qpc << ',' << source << ',' << caller_rva << ','

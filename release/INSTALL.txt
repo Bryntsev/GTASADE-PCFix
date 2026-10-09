@@ -1,0 +1,58 @@
+GTASADE PC Fix (formerly "GTASADE Raw Mouse Fix")
+https://github.com/Bryntsev/GTASADE-PCFix
+
+=== English ===
+
+Close the game. Extract the archives into the game folder, the one that contains "Gameface"
+(Steam: ...\steamapps\common\GTA San Andreas - The Definitive Edition), allow overwriting.
+
+1. Fusion Fix (required): download GTASADE.FusionFix.zip from
+   https://github.com/ThirteenAG/WidescreenFixesPack/releases/tag/gtasade
+   and extract it into the game folder. It fixes the camera behaviour (vertical axis!) and
+   installs the ASI loader that loads this mod.
+2. This archive: extract it into the game folder. You get:
+     Gameface\Binaries\Win64\GTASADE.PCFix.addon64
+     Gameface\Binaries\Win64\scripts\GTASADE.PCFix.asi
+     Gameface\Binaries\Win64\scripts\GTASADE.PCFix.RawInputHelper.exe
+     Gameface\Binaries\Win64\scripts\GTASADE.PCFix.ini
+   Keep the .asi in "scripts" (an .asi directly in Win64 can crash the game on start).
+   Updating from v0.1.0: delete scripts\SADE.HighFpsRawMouseFix.* first.
+3. Optional: ReShade with add-on support (settings panel, on-screen info, hotkeys),
+   via RHI (https://github.com/RankFTW/RHI) or reshade.me ("with full add-on support").
+4. Start the game and play for about 20 seconds.
+
+Check that it works:
+- Gameface\Binaries\Win64\scripts\GTASADE.PCFix.log contains: RAW MOUSE FIX ACTIVE
+- With ReShade: press Home -> Add-ons -> GTASADE PC Fix.
+
+Defaults: raw mouse camera on, sensitivity 1.00, FPS cap 120, on-screen info off.
+Hotkeys (ReShade): Ctrl+PgUp/PgDn FPS cap, Ctrl+End mouse fix on/off, Ctrl+Insert on-screen info.
+Settings without ReShade: scripts\GTASADE.PCFix.ini.
+
+Uninstall: delete the four files above and scripts\GTASADE.PCFix.log.
+
+=== Русский ===
+
+Закройте игру. Распакуйте архивы в папку игры, где лежит папка "Gameface"
+(Steam: ...\steamapps\common\GTA San Andreas - The Definitive Edition), с заменой файлов.
+
+1. Fusion Fix (обязательно): скачайте GTASADE.FusionFix.zip со страницы
+   https://github.com/ThirteenAG/WidescreenFixesPack/releases/tag/gtasade
+   и распакуйте в папку игры. Он исправляет поведение камеры (вертикальная ось!) и ставит
+   ASI Loader, который загружает этот мод.
+2. Этот архив: распакуйте в папку игры (список файлов выше). .asi должен лежать в "scripts"
+   (.asi прямо в Win64 может уронить игру при запуске).
+   Обновление с v0.1.0: сначала удалите scripts\SADE.HighFpsRawMouseFix.*
+3. По желанию: ReShade с поддержкой аддонов (панель настроек, окно информации, горячие клавиши),
+   через RHI (https://github.com/RankFTW/RHI) или reshade.me ("with full add-on support").
+4. Запустите игру и поиграйте секунд 20.
+
+Как проверить, что мод работает:
+- В Gameface\Binaries\Win64\scripts\GTASADE.PCFix.log есть строка: RAW MOUSE FIX ACTIVE
+- С ReShade: клавиша Home -> вкладка Add-ons (Дополнения) -> GTASADE PC Fix.
+
+По умолчанию: raw-мышь включена, чувствительность 1.00, лимит FPS 120, окно информации выключено.
+Горячие клавиши (с ReShade): Ctrl+PgUp/PgDn - лимит FPS, Ctrl+End - мышь вкл/выкл, Ctrl+Insert - окно информации.
+Настройки без ReShade: scripts\GTASADE.PCFix.ini.
+
+Удаление: удалите четыре файла выше и scripts\GTASADE.PCFix.log.

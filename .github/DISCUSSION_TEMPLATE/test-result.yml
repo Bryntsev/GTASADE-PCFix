@@ -2,7 +2,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for testing GTASADE Raw Mouse Fix. Please include enough setup details to compare results.
+        Thanks for testing GTASADE PC Fix. Please include enough setup details to compare results.
   - type: textarea
     id: result
     attributes:

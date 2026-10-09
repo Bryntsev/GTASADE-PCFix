@@ -30,4 +30,4 @@ assignees: ""
 
 ## Logs
 
-Attach `SADE.HighFpsRawMouseFix_*.log` if available.
+Attach `GTASADE.PCFix_*.log` if available.

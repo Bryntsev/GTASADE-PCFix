@@ -6,6 +6,11 @@
 namespace sade {
 
 struct Config {
+  bool enabled = true;
+  std::uint32_t input_source = 0;  // 0 auto (game window, companion fallback), 1 game, 2 companion.
+  // Developer mode: full mouse/camera traces into a per-run folder. Off for regular users.
+  bool developer_mode = false;
+  std::wstring developer_log_directory;
   bool observe_raw_input = true;
   bool observe_get_proc_address = false;
   bool observe_cursor_apis = false;
@@ -17,9 +22,12 @@ struct Config {
   bool observe_markers = false;
   bool observe_gameplay_state = false;
   bool experimental_mouse_fix = false;
-  bool experimental_mouse_fix_v2 = false;
-  bool force_unlimited_fps = true;
-  std::uint32_t experimental_mouse_fix_mode = 2;
+  bool experimental_mouse_fix_v2 = true;
+  bool force_unlimited_fps = false;
+  // FPS cap the mod keeps in the game's settings objects (the game resets its own to 60 on every
+  // launch). 0 = the game decides, -1 = unlimited.
+  std::int32_t max_fps = 120;
+  std::uint32_t experimental_mouse_fix_mode = 27;
   float experimental_mouse_fix_gain_x = 1.0F;
   float experimental_mouse_fix_gain_y = 1.0F;
   std::uint32_t experimental_mouse_fix_max_age_ms = 50;

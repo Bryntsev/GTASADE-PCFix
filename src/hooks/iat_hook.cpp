@@ -41,6 +41,18 @@ std::size_t IatHookSet::install_all_loaded_modules(const char* imported_module,
   return installed;
 }
 
+std::size_t IatHookSet::install_main_module(const char* imported_module,
+                                             const char* function_name,
+                                             void* replacement,
+                                             HMODULE skip_module) {
+  std::lock_guard lock(mutex_);
+  HMODULE main_module = GetModuleHandleW(nullptr);
+  if (main_module == skip_module) {
+    return 0;
+  }
+  return install_module(main_module, imported_module, function_name, replacement) ? 1 : 0;
+}
+
 bool IatHookSet::install_module(HMODULE module, const char* imported_module, const char* function_name, void* replacement) {
   if (module == nullptr || imported_module == nullptr || function_name == nullptr || replacement == nullptr) {
     return false;
